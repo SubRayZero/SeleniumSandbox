@@ -8,7 +8,7 @@ async function testAirbnbSearch() {
 
         await driver.get("https://www.airbnb.com");
 
-        await driver.wait(until.elementLocated(By.css('[data-testid="little-search-card-SearchInput"]')), 10000);
+        await driver.wait(until.elementLocated(By.css('[data-testid="bigsearch-query-location-input"]')), 10000);
 
         let destinationInput = await driver.findElement(By.css('[data-testid="bigsearch-query-location-input"]'));
         await destinationInput.sendKeys("Paris");
