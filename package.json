@@ -12,7 +12,7 @@
   "dependencies": {
     "chromedriver": "^125.0.2",
     "geckodriver": "^4.4.0",
-    "selenium-webdriver": "^4.21.0",
-    "mocha": "10.4.0"
+    "mocha": "10.4.0",
+    "selenium-webdriver": "^4.21.0"
   }
 }
