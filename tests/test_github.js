@@ -5,7 +5,6 @@ async function testGitHubLogin() {
     let driver = await new Builder().forBrowser("firefox").build();
 
     try {
-        // Définir la taille de la fenêtre du navigateur pour simuler un appareil mobile
         await driver.manage().window().setRect({ width: 375, height: 812 });
 
         await driver.get("https://github.com");
