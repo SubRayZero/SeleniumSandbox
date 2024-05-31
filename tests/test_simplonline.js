@@ -1,20 +1,25 @@
 const { Builder, By, Key, until } = require("selenium-webdriver");
+require('dotenv').config();
 
-async function testInvalidLogin() {
+async function testValidLogin() {
     let driver = await new Builder().forBrowser("firefox").build();
 
     try {
+        if (!process.env.EMAIL || !process.env.PASSWORD) {
+            throw new Error("Les variables d'environnement EMAIL et PASSWORD doivent être définies.");
+        }
+
         await driver.get("https://simplonline.co/login");
 
         let emailField = await driver.wait(until.elementLocated(By.name("email")), 10000);
-        await emailField.sendKeys("exemple@email.com", Key.TAB);
+        await emailField.sendKeys(process.env.EMAIL);
 
         let passwordField = await driver.wait(until.elementLocated(By.name("password")), 10000);
-        await passwordField.sendKeys("mdp_errone", Key.RETURN);
+        await passwordField.sendKeys(process.env.PASSWORD, Key.RETURN);
 
-        await driver.wait(until.elementLocated(By.className("alert-danger")), 10000);
+        await driver.wait(until.elementLocated(By.className('profile-username')), 10000);
 
-        console.log("Test de login avec identifiants erronés réussi !");
+        console.log("Connexion réussie avec les identifiants valides !");
 
     } catch (e) {
         console.error("Une erreur est survenue :", e);
@@ -24,4 +29,4 @@ async function testInvalidLogin() {
     }
 }
 
-testInvalidLogin();
+testValidLogin();
