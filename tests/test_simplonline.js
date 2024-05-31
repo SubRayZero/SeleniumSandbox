@@ -1,14 +1,16 @@
 const { Builder, By, Key, until } = require("selenium-webdriver");
 
-
 async function testInvalidLogin() {
     let driver = await new Builder().forBrowser("firefox").build();
 
     try {
-        await driver.get("https://simplonline.co/");
+        await driver.get("https://simplonline.co/login");
 
-        await driver.findElement(By.id("react-aria6231197280-1")).sendKeys("utilisateur_errone", Key.TAB);
-        await driver.findElement(By.id("react-aria6231197280-5")).sendKeys("mdp_errone", Key.RETURN);
+        let emailField = await driver.wait(until.elementLocated(By.name("email")), 10000);
+        await emailField.sendKeys("exemple@email.com", Key.TAB);
+
+        let passwordField = await driver.wait(until.elementLocated(By.name("password")), 10000);
+        await passwordField.sendKeys("mdp_errone", Key.RETURN);
 
         await driver.wait(until.elementLocated(By.className("alert-danger")), 10000);
 
@@ -23,4 +25,3 @@ async function testInvalidLogin() {
 }
 
 testInvalidLogin();
-
